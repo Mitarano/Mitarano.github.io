@@ -1,22 +1,16 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Spotify Authentication Redirect</title>
-</head>
-<body>
-    <script>
-        // Parse the fragment identifier from the URL
-        const hash = window.location.hash.substr(1).split('&').reduce((res, item) => {
-            const parts = item.split('=');
-            res[parts[0]] = decodeURIComponent(parts[1]);
-            return res;
-        }, {});
-
-        if (window.opener) {
-            // Send the access token to the opener window
-            window.opener.postMessage({ type: 'access_token', access_token: hash.access_token }, "*");
-        }
-        window.close(); // Close the popup
-    </script>
-</body>
+  <head>
+    <title>Authenticating Spotify</title>
+  </head>
+  <body>
+	<p>Please wait while we authenticate Spotify...</p>
+	<script type="text/javascript">
+		if(window.opener) {
+			window.opener.postMessage('?' + window.location.href.split('?')[1], "*");
+		} else {
+			window.close();
+		}
+	</script>
+  </body>
 </html>
